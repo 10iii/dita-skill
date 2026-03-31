@@ -7,6 +7,21 @@ description: >
   for design-implementation-test consistency, querying feature status, or analyzing
   feature dependencies and change impact. Triggers: "DITA", "feature tracking",
   "design-implementation alignment", "功能追踪", "设计-实现-测试对齐".
+trigger_keywords:
+  - DITA
+  - feature tracking
+  - design-implementation alignment
+  - 功能追踪
+  - 设计-实现-测试对齐
+  - design alignment
+  - implementation status
+  - test alignment
+  - feature dependencies
+  - change impact
+  - 变更影响
+  - 功能状态
+  - PRD tracking
+  - 设计文档
 license: MIT
 metadata:
   author: 10iii
