@@ -65,7 +65,8 @@ features:
 
 > **DITA 方法论**：Design-Implementation-Test Alignment
 > 
-> 本文档是项目的**单一真相源**，与 Features YAML 保持同步。
+> 本文档是项目的**单一真相源**。关于设计/开发/测试/进度/计划/TODO/讨论/决议/变动的内容，
+> 如不在本文档或其引用的文档中，均视为未生效/临时性/随时可删除。
 
 ---
 
@@ -219,6 +220,25 @@ project/
 ## 9. Notes
 
 {当前状态摘要、临时备注、待办事项等}
+
+---
+
+## 10. Referenced Documents
+
+> 外置的清单性/接口性/契约性文档。这些文档必须在此处引用才视为有效。
+
+| Document | Type | Purpose | Status |
+|----------|------|---------|--------|
+| `docs/runtime-contract.json` | Contract | 运行时约定 | active |
+| `docs/universal-interface.md` | Interface | 通用接口定义 | active |
+| `docs/opcodes.csv` | Resource List | 协议操作码清单 | active |
+| `openapi.yaml` | API Schema | REST API 定义 | draft |
+
+**Document Types:**
+- **Contract**: 组件间约定，机器可解析
+- **Interface**: 接口定义，人机可读
+- **Resource List**: 清单/枚举，数据性质
+- **API Schema**: OpenAPI/GraphQL 等标准格式
 
 ---
 

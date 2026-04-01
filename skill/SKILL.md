@@ -22,10 +22,12 @@ trigger_keywords:
   - 功能状态
   - PRD tracking
   - 设计文档
+  - single source of truth
+  - 唯一真相源
 license: MIT
 metadata:
   author: 10iii
-  version: 1.2.0
+  version: 1.3.0
   category: development-methodology
   tags: [feature-tracking, ai-agent, prd, tdd]
 ---
@@ -33,6 +35,26 @@ metadata:
 # DITA (Design-Implementation-Test Alignment)
 
 A methodology for maintaining strict alignment between design, implementation, and testing in AI agent-driven development.
+
+## Core Principle: Single Source of Truth
+
+⚠️ **DITA-FEATURES.md is the ONLY authoritative document** for:
+
+- Design specs, development plans, test status, progress tracking
+- TODOs and task assignments
+- Discussion records and decisions
+- Change history
+
+**Content NOT in DITA is considered:**
+- ❌ Not effective / temporary / disposable
+- ⚠️ Can be deleted at any time
+
+**Documents allowed outside DITA** (must be referenced in DITA):
+- Interface / Contract definitions (e.g., `runtime-contract.json`)
+- Resource lists / enumerations (e.g., `opcodes.csv`)
+- API schema definitions (e.g., `openapi.yaml`)
+
+These external documents must be listed in the **Referenced Documents** section.
 
 ## Core Concept
 
@@ -141,6 +163,10 @@ The Markdown body should follow this structure:
 4. **Non-Functional Requirements** — Performance, security
 5. **Planned Features** — Roadmap
 6. **Change History** — Chronological log of major changes
+7. **Status Legend** — Status definitions
+8. **Feature ID Ranges** — ID namespace management
+9. **Referenced Documents** — External documents (interfaces, contracts, lists)
+10. **Notes** — Miscellaneous
 
 See `references/template.md` for the complete template.
 
@@ -180,6 +206,63 @@ describe('F001: User Login', () => {
 3. **Feature linking** — All module sections reference Feature IDs
 4. **ISO timestamps** — Use `YYYY-MM-DDTHH:mm:ssZ` format
 5. **No line numbers** — Use `file#function`, not `file:42`
+6. **Reference external docs** — Contracts/interfaces go in Referenced Documents section
+
+## Large Project Modularization
+
+When a project exceeds ~100 Features, split into multiple module files:
+
+### File Structure
+
+```
+project/
+├── DITA-FEATURES.md          # Main file (summary + PRD)
+├── docs/
+│   ├── dita-module-core.md   # Core module features
+│   ├── dita-module-agent.md  # Agent module features
+│   └── dita-module-bot.md    # Bot module features
+```
+
+### Main File YAML Structure
+
+```yaml
+---
+modules:
+  - name: core
+    feature_range: F001-F099
+    file: docs/dita-module-core.md
+  - name: agent
+    feature_range: F100-F199
+    file: docs/dita-module-agent.md
+features: []  # Main file only contains cross-module features
+---
+```
+
+### Module File Structure
+
+Each `dita-module-*.md` follows the same format:
+
+```yaml
+---
+module: core
+feature_range: F001-F099
+features:
+  - id: F001
+    ...
+---
+
+# Module: Core
+
+{Module-level PRD content}
+```
+
+### Scale Recommendations
+
+| Scale | Strategy |
+|-------|----------|
+| < 30 Features | Single DITA-FEATURES.md |
+| 30-100 Features | Single file + Referenced Docs |
+| > 100 Features | Main file + dita-module-*.md split |
 
 ## References
 
